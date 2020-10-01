@@ -1,0 +1,121 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+
+namespace CrazyThreading
+{
+    class Program
+    {
+        public static object Sleep { get; private set; }
+
+        static void Main(string[] args) 
+        {
+
+            //Name Input      
+            {
+                Console.WriteLine("Welcome to Bullseye, to get started please enter your name: ");
+                string Name = Console.ReadLine();
+                Console.WriteLine($"Hello {Name} Lets get started!");
+            }
+
+
+
+            //first, we need to generate an x and a y coordinate on the screen (0,0 to 1080,1920)
+
+
+            Random rand = new Random();
+
+            int posX = rand.Next(0, 1920);
+            
+            int posY = rand.Next(0, 1080);
+
+            Console.WriteLine($"Position X = {posX}. Position Y = {posY}");
+
+            int locX = Cursor.Position.X;
+            int locY = Cursor.Position.Y;
+
+            Console.WriteLine($"cursor location x = {locX}. cursor location y =  {locY}");
+
+            var distance = Math.Sqrt((Math.Pow(posX - locX, 2) + Math.Pow(posY - locY, 2))) ;
+
+            Math.Floor(distance);
+
+            Console.WriteLine($"{distance}");
+
+            Console.ReadLine();
+            
+
+
+            //create a function that gives the user feedback based on how close he/she is to the target
+
+            //while (posX != locX && posY != locY )
+            //{
+            //    Thread.Sleep(25);
+
+            //    locX = Cursor.Position.X;
+            //    locY = Cursor.Position.Y;
+            //    distance = Math.Floor(Math.Sqrt((Math.Pow(posX - locX, 2) + Math.Pow(posY - locY, 2))));
+            //    Console.WriteLine($"cursor location x  = {locX}. cursor location y = {locY}. find {posX} and {posY}. the distance between the  two points is {distance}");
+
+            //   /* if ((locX == posX)  && (locY == posY))
+            //    {
+            //        Console.WriteLine($" You did it!");
+                    
+            //    }*/
+            //}
+
+            while (true)
+            {
+                Thread.Sleep(25);
+
+                locX = Cursor.Position.X;
+                locY = Cursor.Position.Y;
+                distance = Math.Floor(Math.Sqrt((Math.Pow(posX - locX, 2) + Math.Pow(posY - locY, 2))));
+                Console.WriteLine($"cursor location x  = {locX}. cursor location y = {locY}. find {posX} and {posY}. the distance between the  two points is {distance}");
+
+                if ((locX == posX) && (locY == posY))
+                {
+                    Console.WriteLine($" You did it!");
+                    break;
+                }
+            }
+
+            Console.ReadKey();
+
+
+            Console.WriteLine("You did it!");
+
+            
+
+
+
+
+
+            //use an onEvent or some shit to track the time taken to find the spot ie: onEvent click var totalClicks = totalClicks++ then output the location clicked
+
+            // display the time taken to find the point
+
+            /*if totalClicks <= 100, and targetHit (true/false) to c:\bullseyeDa\myData.txt
+            If the folder does not exist, you need to create it. 
+            If myData.txt does not exist you need to create it.
+            If it does exist, you need to write to it.*/
+
+            //output to the console "you win in x number of clicks, the load https://www.youtube.com/watch?v=mnpjpdhUNjY if not, display “You couldn’t hit the broad side of a barn with a bowling ball. Maybe try again.” and open this https://www.youtube.com/watch?v=dQw4w9WgXcQ 
+
+            //give then player an option to play again and record the data to myData.txt by adding a new line and not deleting the old scores.
+        }
+
+
+
+    }
+
+
+
+
+
+}
